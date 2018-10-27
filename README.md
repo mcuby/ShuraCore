@@ -1,2 +1,2 @@
 # shura-core
-shura-core is a cpu created by Shulenkov Roman Alexandrovich
+shura-core is a cpu core created by Shulenkov Roman Alexandrovich
