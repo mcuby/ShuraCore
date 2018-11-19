@@ -1,7 +1,8 @@
 #include <stdint.h>
 #include <alu.h>
 
-class REG {
+class REG
+{
 public:
 
 //basic registers for writing
@@ -36,14 +37,15 @@ public:
     uint64_t er = 0;
 
 //temporary register
-    uint64_t t0 = 0; //for writing data
+    uint64_t t0 = 0; //for writing data to registers
     uint64_t t1 = 0; //for reading data
+    uint64_t t2 = 0; //for writing data
 
 //struct of valid data
     struct _svd {
-       uint8_t extension: 1;
-       uint8_t register_number : 4;
-       uint8_t reserve : 3;
+        uint8_t extension: 1;
+        uint8_t register_number : 4;
+        uint8_t reserve : 3;
     };
 
     //bool, char, unsigned char, signed char, __int8            1 byte
@@ -51,160 +53,281 @@ public:
     //float, __int32, int, unsigned int, long, unsigned long	4 bytes
     //double, __int64, long double, long long                   8 bytes
 
-    //write data
-    void _wd (_svd value, const uint32_t &data) {
+    //write data to registers
+    void _wd(_svd value, const uint32_t &data)
+    {
         t0 = 0;
         switch (value.register_number) {
         case 0:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w0 = globalALU._or<uint64_t>(w0, t0);
-            }
-            else{
+            } else {
                 w0 = data;
             }
             break;
         case 1:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w1 = globalALU._or<uint64_t>(w1, t0);
-            }
-            else{
+            } else {
                 w1 = data;
             }
             break;
         case 2:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w2 = globalALU._or<uint64_t>(w2, t0);
-            }
-            else{
+            } else {
                 w2 = data;
             }
             break;
         case 3:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w3 = globalALU._or<uint64_t>(w3, t0);
-            }
-            else{
+            } else {
                 w3 = data;
             }
             break;
         case 4:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w4 = globalALU._or<uint64_t>(w4, t0);
-            }
-            else{
+            } else {
                 w4 = data;
             }
             break;
         case 5:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w5 = globalALU._or<uint64_t>(w5, t0);
-            }
-            else{
+            } else {
                 w5 = data;
             }
             break;
         case 6:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w6 = globalALU._or<uint64_t>(w6, t0);
-            }
-            else{
+            } else {
                 w6 = data;
             }
             break;
         case 7:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);
                 w7 = globalALU._or<uint64_t>(w7, t0);
-            }
-            else{
+            } else {
                 w7 = data;
             }
             break;
         }
     }
 
-    //native data reading
-    void _rn (_svd value, const uint32_t *address) {
+    //native data reading (from RAM - 32 bits)
+    void _rn(_svd value, const uint32_t *address)
+    {
         t1 = 0;
         switch (value.register_number) {
         case 0:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r0 = globalALU._or<uint64_t>(r0, t0);
-            }
-            else{
+            } else {
                 r0 = *address;
             }
             break;
         case 1:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r1 = globalALU._or<uint64_t>(r1, t0);
-            }
-            else{
+            } else {
                 r1 = *address;
             }
             break;
         case 2:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r2 = globalALU._or<uint64_t>(r2, t0);
-            }
-            else{
+            } else {
                 r2 = *address;
             }
             break;
         case 3:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r3 = globalALU._or<uint64_t>(r3, t0);
-            }
-            else{
+            } else {
                 r3 = *address;
             }
             break;
         case 4:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r4 = globalALU._or<uint64_t>(r4, t0);
-            }
-            else{
+            } else {
                 r4 = *address;
             }
             break;
         case 5:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r5 = globalALU._or<uint64_t>(r5, t0);
-            }
-            else{
+            } else {
                 r5 = *address;
             }
             break;
         case 6:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r6 = globalALU._or<uint64_t>(r6, t0);
-            }
-            else{
+            } else {
                 r6 = *address;
             }
             break;
         case 7:
-            if(value.extension){
+            if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(*address, 32);
                 r7 = globalALU._or<uint64_t>(r7, t0);
-            }
-            else{
+            } else {
                 r7 = *address;
             }
+            break;
+        }
+    }
+
+    //native data extentio reading (from RAM - 64 bits)
+    void _rne(_svd value, const uint64_t *address)
+    {
+        t1 = 0;
+        switch (value.register_number) {
+        case 0:
+            r0 = *address;
+            break;
+        case 1:
+            r1 = *address;
+            break;
+        case 2:
+            r2 = *address;
+            break;
+        case 3:
+            r3 = *address;
+            break;
+        case 4:
+            r4 = *address;
+            break;
+        case 5:
+            r5 = *address;
+            break;
+        case 6:
+            r6 = *address;
+            break;
+        case 7:
+            r7 = *address;
+            break;
+        }
+    }
+
+    //native data writing (to RAM - 32 bits)
+    void _wn(_svd value, const uint32_t *address)
+    {
+        t2 = 0;
+        switch (value.register_number) {
+        case 0:
+            if (value.extension) {
+                t2 = globalALU._lshift<uint64_t>(*address, 32);
+                r0 = globalALU._or<uint64_t>(r0, t0);
+            } else {
+                r0 = *address;
+            }
+            break;
+        case 1:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r1 = globalALU._or<uint64_t>(r1, t0);
+            } else {
+                r1 = *address;
+            }
+            break;
+        case 2:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r2 = globalALU._or<uint64_t>(r2, t0);
+            } else {
+                r2 = *address;
+            }
+            break;
+        case 3:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r3 = globalALU._or<uint64_t>(r3, t0);
+            } else {
+                r3 = *address;
+            }
+            break;
+        case 4:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r4 = globalALU._or<uint64_t>(r4, t0);
+            } else {
+                r4 = *address;
+            }
+            break;
+        case 5:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r5 = globalALU._or<uint64_t>(r5, t0);
+            } else {
+                r5 = *address;
+            }
+            break;
+        case 6:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r6 = globalALU._or<uint64_t>(r6, t0);
+            } else {
+                r6 = *address;
+            }
+            break;
+        case 7:
+            if (value.extension) {
+                t0 = globalALU._lshift<uint64_t>(*address, 32);
+                r7 = globalALU._or<uint64_t>(r7, t0);
+            } else {
+                r7 = *address;
+            }
+            break;
+        }
+    }
+
+    //native data extentio writing (to RAM - 64 bits)
+    void _wne(_svd value, uint64_t *address)
+    {
+        switch (value.register_number) {
+        case 0:
+            *address = r0;
+            break;
+        case 1:
+            *address = r1;
+            break;
+        case 2:
+            *address = r2;
+            break;
+        case 3:
+            *address = r3;
+            break;
+        case 4:
+            *address = r4;
+            break;
+        case 5:
+            *address = r5;
+            break;
+        case 6:
+            *address = r6;
+            break;
+        case 7:
+            *address = r7;
             break;
         }
     }
