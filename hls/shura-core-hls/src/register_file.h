@@ -1,6 +1,13 @@
 #include <stdint.h>
 #include <alu.h>
 
+//struct of valid data
+struct _svd {
+    uint8_t extension: 1;
+    uint8_t register_number : 4;
+    uint8_t reserve : 3;
+};
+
 class REG
 {
 public:
@@ -41,12 +48,6 @@ public:
     uint64_t t1 = 0; //for reading data
     uint64_t t2 = 0; //for writing data
 
-//struct of valid data
-    struct _svd {
-        uint8_t extension: 1;
-        uint8_t register_number : 4;
-        uint8_t reserve : 3;
-    };
 
     //bool, char, unsigned char, signed char, __int8            1 byte
     //__int16, short, unsigned short, wchar_t, __wchar_t        2 bytes
@@ -125,82 +126,9 @@ public:
         }
     }
 
-    //native data reading (from RAM - 32 bits)
-    void _rn(_svd value, const uint32_t *address)
-    {
-        t1 = 0;
-        switch (value.register_number) {
-        case 0:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r0 = globalALU._or<uint64_t>(r0, t0);
-            } else {
-                r0 = *address;
-            }
-            break;
-        case 1:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r1 = globalALU._or<uint64_t>(r1, t0);
-            } else {
-                r1 = *address;
-            }
-            break;
-        case 2:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r2 = globalALU._or<uint64_t>(r2, t0);
-            } else {
-                r2 = *address;
-            }
-            break;
-        case 3:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r3 = globalALU._or<uint64_t>(r3, t0);
-            } else {
-                r3 = *address;
-            }
-            break;
-        case 4:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r4 = globalALU._or<uint64_t>(r4, t0);
-            } else {
-                r4 = *address;
-            }
-            break;
-        case 5:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r5 = globalALU._or<uint64_t>(r5, t0);
-            } else {
-                r5 = *address;
-            }
-            break;
-        case 6:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r6 = globalALU._or<uint64_t>(r6, t0);
-            } else {
-                r6 = *address;
-            }
-            break;
-        case 7:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r7 = globalALU._or<uint64_t>(r7, t0);
-            } else {
-                r7 = *address;
-            }
-            break;
-        }
-    }
-
     //native data extentio reading (from RAM - 64 bits)
-    void _rne(_svd value, const uint64_t *address)
+    void _rn(_svd value, const uint64_t *address)
     {
-        t1 = 0;
         switch (value.register_number) {
         case 0:
             r0 = *address;
@@ -229,80 +157,8 @@ public:
         }
     }
 
-    //native data writing (to RAM - 32 bits)
-    void _wn(_svd value, const uint32_t *address)
-    {
-        t2 = 0;
-        switch (value.register_number) {
-        case 0:
-            if (value.extension) {
-                t2 = globalALU._lshift<uint64_t>(*address, 32);
-                r0 = globalALU._or<uint64_t>(r0, t0);
-            } else {
-                r0 = *address;
-            }
-            break;
-        case 1:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r1 = globalALU._or<uint64_t>(r1, t0);
-            } else {
-                r1 = *address;
-            }
-            break;
-        case 2:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r2 = globalALU._or<uint64_t>(r2, t0);
-            } else {
-                r2 = *address;
-            }
-            break;
-        case 3:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r3 = globalALU._or<uint64_t>(r3, t0);
-            } else {
-                r3 = *address;
-            }
-            break;
-        case 4:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r4 = globalALU._or<uint64_t>(r4, t0);
-            } else {
-                r4 = *address;
-            }
-            break;
-        case 5:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r5 = globalALU._or<uint64_t>(r5, t0);
-            } else {
-                r5 = *address;
-            }
-            break;
-        case 6:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r6 = globalALU._or<uint64_t>(r6, t0);
-            } else {
-                r6 = *address;
-            }
-            break;
-        case 7:
-            if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(*address, 32);
-                r7 = globalALU._or<uint64_t>(r7, t0);
-            } else {
-                r7 = *address;
-            }
-            break;
-        }
-    }
-
     //native data extentio writing (to RAM - 64 bits)
-    void _wne(_svd value, uint64_t *address)
+    void _wn(_svd value, uint64_t *address)
     {
         switch (value.register_number) {
         case 0:
@@ -332,3 +188,5 @@ public:
         }
     }
 };
+
+extern class REG globalREG;
