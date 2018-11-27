@@ -18,15 +18,20 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 */
 
 #include <stdint.h>
-#include <alu.h>
+#include "alu.h"
 
-//struct of valid data
-struct _svd {
+/**
+ * @brief The SVD struct is a struct of valid data
+ */
+struct SVD {
     uint8_t extension: 1;
-    uint8_t register_number : 4;
-    uint8_t reserve : 3;
+    uint8_t registerNumber : 3;
+    uint8_t reserve : 4;
 };
 
+/**
+ * @brief The REG class
+ */
 class REG
 {
 public:
@@ -66,6 +71,7 @@ public:
     uint64_t t0 = 0; //for writing data to registers
     uint64_t t1 = 0; //for reading data
     uint64_t t2 = 0; //for writing data
+    uint64_t t3 = 0; //for decoding data
 
     //bool, char, unsigned char, signed char, __int8            1 byte
     //__int16, short, unsigned short, wchar_t, __wchar_t        2 bytes
@@ -73,10 +79,10 @@ public:
     //double, __int64, long double, long long                   8 bytes
 
     //write data to registers
-    void _wd(_svd value, const uint32_t &data)
+    void wd(SVD value, const uint32_t &data)
     {
         t0 = 0;
-        switch (value.register_number) {
+        switch (value.registerNumber) {
         case 0:
             if (value.extension) {
                 t0 = globalALU._lshift<uint64_t>(data, 32);

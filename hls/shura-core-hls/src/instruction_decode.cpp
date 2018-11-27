@@ -17,7 +17,14 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
  SSSSSSSSSSSSSSS    hhhhhhh     hhhhhhh    uuuuuuuu  uuuurrrrrrr            aaaaaaaaaa  aaaa       CCCCCCCCCCCCC   ooooooooooo    rrrrrrr                eeeeeeeeeeeeee
 */
 
-class DECODE
+#include "instruction_decode.h"
+#include "register_file.h"
+
+
+void Decode::decodeInputData(uint64_t data)
 {
 
-};
+    globalREG.t3 = data & 0xFFFF000000000000; //get instruction
+    globalREG.t3 = globalALU._rshift<uint64_t>(globalREG.t3, 48);
+
+}

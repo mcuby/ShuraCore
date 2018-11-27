@@ -17,70 +17,70 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
  SSSSSSSSSSSSSSS    hhhhhhh     hhhhhhh    uuuuuuuu  uuuurrrrrrr            aaaaaaaaaa  aaaa       CCCCCCCCCCCCC   ooooooooooo    rrrrrrr                eeeeeeeeeeeeee
 */
 
-#include "alu.h"
+//#include "alu.h"
 
 
-class MEM
-{
-    //native data extentio reading (from RAM - 64 bits)
-    void _rn(_svd, const uint64_t *address)
-    {
-        switch (value.register_number) {
-        case 0:
-            r0 = *address;
-            break;
-        case 1:
-            r1 = *address;
-            break;
-        case 2:
-            r2 = *address;
-            break;
-        case 3:
-            r3 = *address;
-            break;
-        case 4:
-            r4 = *address;
-            break;
-        case 5:
-            r5 = *address;
-            break;
-        case 6:
-            r6 = *address;
-            break;
-        case 7:
-            r7 = *address;
-            break;
-        }
-    }
+//class MEM
+//{
+//    //native data extentio reading (from RAM - 64 bits)
+//    void _rn(_svd, const uint64_t *address)
+//    {
+//        switch (value.register_number) {
+//        case 0:
+//            r0 = *address;
+//            break;
+//        case 1:
+//            r1 = *address;
+//            break;
+//        case 2:
+//            r2 = *address;
+//            break;
+//        case 3:
+//            r3 = *address;
+//            break;
+//        case 4:
+//            r4 = *address;
+//            break;
+//        case 5:
+//            r5 = *address;
+//            break;
+//        case 6:
+//            r6 = *address;
+//            break;
+//        case 7:
+//            r7 = *address;
+//            break;
+//        }
+//    }
 
-//native data extentio writing (to RAM - 64 bits)
-    void _wn(_svd value, uint64_t *address)
-    {
-        switch (value.register_number) {
-        case 0:
-            *address = r0;
-            break;
-        case 1:
-            *address = r1;
-            break;
-        case 2:
-            *address = r2;
-            break;
-        case 3:
-            *address = r3;
-            break;
-        case 4:
-            *address = r4;
-            break;
-        case 5:
-            *address = r5;
-            break;
-        case 6:
-            *address = r6;
-            break;
-        case 7:
-            *address = r7;
-            break;
-        }
-    }
-};
+////native data extentio writing (to RAM - 64 bits)
+//    void _wn(_svd value, uint64_t *address)
+//    {
+//        switch (value.register_number) {
+//        case 0:
+//            *address = r0;
+//            break;
+//        case 1:
+//            *address = r1;
+//            break;
+//        case 2:
+//            *address = r2;
+//            break;
+//        case 3:
+//            *address = r3;
+//            break;
+//        case 4:
+//            *address = r4;
+//            break;
+//        case 5:
+//            *address = r5;
+//            break;
+//        case 6:
+//            *address = r6;
+//            break;
+//        case 7:
+//            *address = r7;
+//            break;
+//        }
+//    }
+//};

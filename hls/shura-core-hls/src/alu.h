@@ -20,14 +20,16 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 
 //Overview of Arbitrary Precision Integer Data Types
 
+/**
+ * @brief The ALU class
+ */
 class ALU
 {
 public:
-    //Arithmetic operators
+//    Arithmetic operators
 
+//    Addition
 
-
-    //Addition
     template <class T>
     T _add(T const &a, T const &b)
     {
@@ -105,6 +107,7 @@ public:
     {
         return a >> b;
     }
+
 
 	//Comparison operators/relational operators
 

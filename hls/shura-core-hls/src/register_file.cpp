@@ -22,17 +22,20 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 
 class REG globalREG;
 
-void test_wd()
+/**
+ * @brief testForWd
+ */
+void testForWd()
 {
-    //testing for _wd instrucion
+    //testing for wd instrucion
 
     uint32_t dataToReg   = 0x01234567;
     uint32_t dataToRegP1 = 0x01234567;
     uint32_t dataToRegP2 = 0x89ABCDEF;
 
-    _svd dataSvd;
-    _svd dataSvdP1;
-    _svd dataSvdP2;
+    SVD dataSvd;
+    SVD dataSvdP1;
+    SVD dataSvdP2;
 
     for (uint j = 0; j < 2; j++) {
 
@@ -50,8 +53,8 @@ void test_wd()
 
             //data 32bit to register
             dataSvd.extension = 0;
-            dataSvd.register_number = i;
-            globalREG._wd(dataSvd, dataToReg);
+            dataSvd.registerNumber = i;
+            globalREG.wd(dataSvd, dataToReg);
 
             std::cout << "w0 = " << std::hex << globalREG.w0 <<  "\n"
                       << "w1 = " << std::hex << globalREG.w1 <<  "\n"
@@ -65,8 +68,8 @@ void test_wd()
 
             //data 64bit to register
             dataSvdP2.extension = 0;
-            dataSvdP2.register_number = i;
-            globalREG._wd(dataSvdP2, dataToRegP2);
+            dataSvdP2.registerNumber = i;
+            globalREG.wd(dataSvdP2, dataToRegP2);
 
             std::cout << "w0 = " << std::hex << globalREG.w0 <<  "\n"
                       << "w1 = " << std::hex << globalREG.w1 <<  "\n"
@@ -79,8 +82,8 @@ void test_wd()
             std::cout << "---------------------------------" <<  "\n";
 
             dataSvdP1.extension = 1;
-            dataSvdP1.register_number = i;
-            globalREG._wd(dataSvdP1, dataToRegP1);
+            dataSvdP1.registerNumber = i;
+            globalREG.wd(dataSvdP1, dataToRegP1);
 
             std::cout << "w0 = " << std::hex << globalREG.w0 <<  "\n"
                       << "w1 = " << std::hex << globalREG.w1 <<  "\n"
