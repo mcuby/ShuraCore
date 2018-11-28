@@ -23,7 +23,11 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 /**
  * @brief The SVD struct is a struct of valid data
  */
-struct SVD {
+struct Svd {
+    uint8_t var0: 8;
+    uint8_t var1: 8;
+    uint8_t var2: 8;
+
     uint8_t extension: 1;
     uint8_t registerNumber : 3;
     uint8_t reserve : 4;
@@ -32,7 +36,7 @@ struct SVD {
 /**
  * @brief The REG class
  */
-class REG
+class Reg
 {
 public:
 
@@ -79,70 +83,70 @@ public:
     //double, __int64, long double, long long                   8 bytes
 
     //write data to registers
-    void wd(SVD value, const uint32_t &data)
+    void wd(Svd &value, const uint32_t &data)
     {
         t0 = 0;
         switch (value.registerNumber) {
         case 0:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w0 = globalALU._or<uint64_t>(w0, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w0 = commonlAluObj._or<uint64_t>(w0, t0);
             } else {
                 w0 = data;
             }
             break;
         case 1:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w1 = globalALU._or<uint64_t>(w1, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w1 = commonlAluObj._or<uint64_t>(w1, t0);
             } else {
                 w1 = data;
             }
             break;
         case 2:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w2 = globalALU._or<uint64_t>(w2, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w2 = commonlAluObj._or<uint64_t>(w2, t0);
             } else {
                 w2 = data;
             }
             break;
         case 3:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w3 = globalALU._or<uint64_t>(w3, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w3 = commonlAluObj._or<uint64_t>(w3, t0);
             } else {
                 w3 = data;
             }
             break;
         case 4:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w4 = globalALU._or<uint64_t>(w4, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w4 = commonlAluObj._or<uint64_t>(w4, t0);
             } else {
                 w4 = data;
             }
             break;
         case 5:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w5 = globalALU._or<uint64_t>(w5, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w5 = commonlAluObj._or<uint64_t>(w5, t0);
             } else {
                 w5 = data;
             }
             break;
         case 6:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w6 = globalALU._or<uint64_t>(w6, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w6 = commonlAluObj._or<uint64_t>(w6, t0);
             } else {
                 w6 = data;
             }
             break;
         case 7:
             if (value.extension) {
-                t0 = globalALU._lshift<uint64_t>(data, 32);
-                w7 = globalALU._or<uint64_t>(w7, t0);
+                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+                w7 = commonlAluObj._or<uint64_t>(w7, t0);
             } else {
                 w7 = data;
             }
@@ -151,4 +155,4 @@ public:
     }
 };
 
-extern class REG globalREG;
+extern class Reg commonRegsObj;

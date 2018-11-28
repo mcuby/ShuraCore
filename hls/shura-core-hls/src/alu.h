@@ -155,6 +155,6 @@ public:
 
 };
 
-extern class ALU globalALU;
+extern class ALU commonlAluObj;
 
 

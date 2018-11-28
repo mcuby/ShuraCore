@@ -19,4 +19,4 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 
 #include "alu.h"
 
-class ALU globalALU;
+class ALU commonlAluObj;

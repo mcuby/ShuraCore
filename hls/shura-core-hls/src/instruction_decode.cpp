@@ -21,10 +21,85 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 #include "register_file.h"
 
 
+Decode commonDecodeObj;
+
+void Decode::decodeInputDataForAlu(uint64_t dataForAlu)
+{
+    switch (dataForAlu & 0x3F) {
+    case ADD:
+
+        break;
+
+    case SUB:
+        break;
+
+    case MUL:
+        break;
+
+    case DIV :
+        break;
+
+    case MOD :
+        break;
+
+    case XOR :
+        break;
+
+    case AND :
+        break;
+
+    case OR  :
+        break;
+
+    case NOT :
+        break;
+
+    case LSHIFT :
+        break;
+
+    case RSHIFT :
+        break;
+
+    case EQUAL :
+        break;
+
+    case NEQUAL :
+        break;
+
+    case GREATER :
+        break;
+
+    case LESS :
+        break;
+
+    case GEQUAL:
+        break;
+
+    case LEQUAL :
+        break;
+    }
+}
+
 void Decode::decodeInputData(uint64_t data)
 {
 
-    globalREG.t3 = data & 0xFFFF000000000000; //get instruction
-    globalREG.t3 = globalALU._rshift<uint64_t>(globalREG.t3, 48);
+    if (data & 0x3F) {
+        decodeInputDataForAlu(data);
+    }
+
+    if (data & 0x40) {
+        Svd obj;
+
+        //for furture
+        obj.var0 = (data & 0xFF);
+        obj.var1 = (data & 0xFF00) >> 8;
+        obj.var2 = (data & 0xFF0000) >> 16;
+
+        obj.extension = (data & 0x1000000) >> 24;
+        obj.registerNumber = (data & 0xE000000) >> 25;
+        obj.reserve = (data & 0xF0000000) >> 28;
+        uint32_t dataForReg = (data & 0xffffffff00000000) >> 32;
+        commonRegsObj.wd(obj, dataForReg);
+    }
 
 }

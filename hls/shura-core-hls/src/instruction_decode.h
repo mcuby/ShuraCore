@@ -27,8 +27,13 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 struct ExucateAlu {
     uint8_t reg0: 3;
     uint8_t reg1: 3;
-    uint8_t extencion: 2;
+    uint8_t extencion: 2; //float - 00, unsigned - 01, signed - 10, double - 11
 };
+
+// [0  ... 15] - instructions (65536)
+// [16 ... 23] - for /reg0/reg1/extension reg_0
+// [24 ... 31] - for /reg0/reg1/extension reg_1
+// [31 ... 64] - value 32 bit
 
 class Decode
 {
@@ -52,73 +57,75 @@ public:
     /**
      * @brief ADD
      */
-    const uint16_t ADD = 0;
+    static const uint16_t ADD = 0;
     /**
      * @brief SUB
      */
-    const uint16_t SUB = 1;
+    static const uint16_t SUB = 1;
     /**
      * @brief MUL
      */
-    const uint16_t MUL = 2;
+    static const uint16_t MUL = 2;
     /**
      * @brief DIV
      */
-    const uint16_t DIV = 3;
+    static const uint16_t DIV = 3;
     /**
      * @brief MOD
      */
-    const uint16_t MOD = 4;
+    static const uint16_t MOD = 4;
 
     // Bitwise operators
     /**
      * @brief XOR
      */
-    const uint16_t XOR = 5;
+    static const uint16_t XOR = 5;
     /**
      * @brief AND
      */
-    const uint16_t AND = 6;
+    static const uint16_t AND = 6;
     /**
      * @brief OR
      */
-    const uint16_t OR  = 7;
+    static const uint16_t OR  = 7;
     /**
      * @brief NOT
      */
-    const uint16_t NOT = 8;
+    static const uint16_t NOT = 8;
     /**
      * @brief LSHIFT
      */
-    const uint16_t LSHIFT = 9;
+    static const uint16_t LSHIFT = 9;
     /**
      * @brief RSHIFT
      */
-    const uint16_t RSHIFT = 10;
+    static const uint16_t RSHIFT = 10;
 
     // Comparison operators/relational operators
     /**
      * @brief EQUAL
      */
-    const uint16_t EQUAL = 11;
+    static const uint16_t EQUAL = 11;
     /**
      * @brief NEQUAL
      */
-    const uint16_t NEQUAL = 12;
+    static const uint16_t NEQUAL = 12;
     /**
      * @brief GREATER
      */
-    const uint16_t GREATER = 13;
+    static const uint16_t GREATER = 13;
     /**
      * @brief LESS
      */
-    const uint16_t LESS = 14;
+    static const uint16_t LESS = 14;
     /**
      * @brief GEQUAL
      */
-    const uint16_t GEQUAL = 15;
+    static const uint16_t GEQUAL = 15;
     /**
      * @brief LEQUAL
      */
-    const uint16_t LEQUAL = 16;
+    static const uint16_t LEQUAL = 16;
 };
+
+extern Decode commonDecodeObj;
