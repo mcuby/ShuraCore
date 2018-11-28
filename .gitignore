@@ -1,0 +1,6 @@
+
+*.o
+
+hls/qt-test/build-shura_core_tests-Desktop_Qt_5_11_1_GCC_64bit-Release/
+
+hls/qt-test/build-shura_core_tests-Desktop_Qt_5_11_1_GCC_64bit-Debug/
