@@ -128,4 +128,6 @@ public:
     static const uint16_t LEQUAL = 16;
 };
 
+void testForDecodeForWd();
+
 extern Decode commonDecodeObj;

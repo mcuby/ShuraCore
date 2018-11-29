@@ -19,10 +19,15 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 
 #include "instruction_decode.h"
 #include "register_file.h"
+#include <iostream>
 
 
 Decode commonDecodeObj;
 
+/**
+ * @brief Decode::decodeInputDataForAlu
+ * @param dataForAlu
+ */
 void Decode::decodeInputDataForAlu(uint64_t dataForAlu)
 {
     switch (dataForAlu & 0x3F) {
@@ -80,6 +85,10 @@ void Decode::decodeInputDataForAlu(uint64_t dataForAlu)
     }
 }
 
+/**
+ * @brief Decode::decodeInputData
+ * @param data
+ */
 void Decode::decodeInputData(uint64_t data)
 {
 
@@ -103,3 +112,64 @@ void Decode::decodeInputData(uint64_t data)
     }
 
 }
+
+/**
+ * @brief testForDecodeForWd
+ */
+void testForDecodeForWd()
+{
+    uint64_t arrayDataForTest[24] = {
+
+        0x8888888800000040, //register 0, -> wd r0, 0, 0x88888888
+        0x9999999900000040, //register 0, -> wd r0, 0, 0x99999999
+        0xAAAAAAAA01000040, //register 0, register with padding up to 64 bits, -> wd r0, 1, 0xAAAAAAAA
+
+        0x8888888802000040, //register 1, -> wd r1, 0, 0x88888888
+        0x9999999902000040, //register 1, -> wd r1, 0, 0x99999999
+        0xAAAAAAAA03000040, //register 1, register with padding up to 64 bits, -> wd r1, 1, 0xAAAAAAAA
+
+        0x8888888804000040, //register 2, -> wd r2, 0, 0x88888888
+        0x9999999904000040, //register 2, -> wd r2, 0, 0x99999999
+        0xAAAAAAAA05000040, //register 2, register with padding up to 64 bits, -> wd r2, 1, 0xAAAAAAAA
+
+        0x8888888806000040, //register 3, -> wd r3, 0, 0x88888888
+        0x9999999906000040, //register 3, -> wd r3, 0, 0x99999999
+        0xAAAAAAAA07000040, //register 3, register with padding up to 64 bits, -> wd r3, 1, 0xAAAAAAAA
+
+        0x8888888808000040, //register 4, -> wd r4, 0, 0x88888888
+        0x9999999908000040, //register 4, -> wd r4, 0, 0x99999999
+        0xAAAAAAAA09000040, //register 4, register with padding up to 64 bits, -> wd r4, 1, 0xAAAAAAAA
+
+        0x888888880A000040, //register 5, -> wd r5, 0, 0x88888888
+        0x999999990A000040, //register 5, -> wd r5, 0, 0x99999999
+        0xAAAAAAAA0B000040, //register 5, register with padding up to 64 bits, -> wd r5, 1, 0xAAAAAAAA
+
+        0x888888880C000040, //register 6, -> wd r6, 0, 0x88888888
+        0x999999990C000040, //register 6, -> wd r6, 0, 0x99999999
+        0xAAAAAAAA0D000040, //register 6, register with padding up to 64 bits, -> wd r6, 1, 0xAAAAAAAA
+
+        0x888888880E000040, //register 7, -> wd r7, 0, 0x88888888
+        0x999999990E000040, //register 7, -> wd r7, 0, 0x99999999
+        0xAAAAAAAA0F000040, //register 7, register with padding up to 64 bits, -> wd r7, 1, 0xAAAAAAAA
+    };
+
+    for (uint64_t number : arrayDataForTest) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------" <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w0 <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w1 <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w2 <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w3 <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w4 <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w5 <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w6 <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w7 <<  "\n";
+
+        std::cout << "---------------------------------" <<  "\n";
+    }
+}
+
+
+

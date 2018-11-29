@@ -155,4 +155,7 @@ public:
     }
 };
 
+
+void testForWd();
+
 extern class Reg commonRegsObj;
