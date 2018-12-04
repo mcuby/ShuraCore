@@ -25,14 +25,20 @@ S:::::::::::::::SS  h:::::h     h:::::h  uu::::::::uu:::ur:::::r           a::::
 
 
 struct ExucateAlu {
-    uint8_t reg0: 3;
-    uint8_t reg1: 3;
-    uint8_t extencion: 2; //float - 00, unsigned - 01, signed - 10, double - 11
+    uint8_t regs: 1; //if regs = 0 then use value, if regs = 1 then use regs
+    uint8_t reserv: 7;
 };
 
+struct AluControlBits {
+    uint8_t reg0: 3;
+    uint8_t reg1: 3;
+    uint8_t extencion: 2; //unsigned - 00, signed - 01, flaot - 10, double - 11 (data type)
+};
+
+
 // [0  ... 15] - instructions (65536)
-// [16 ... 23] - for /reg0/reg1/extension reg_0
-// [24 ... 31] - for /reg0/reg1/extension reg_1
+// [16 ... 23] - control bits
+// [24 ... 31] - for /reg0/reg1/extension
 // [31 ... 64] - value 32 bit
 
 class Decode

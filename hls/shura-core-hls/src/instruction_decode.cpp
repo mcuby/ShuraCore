@@ -32,10 +32,101 @@ void Decode::decodeInputDataForAlu(uint64_t dataForAlu)
 {
     switch (dataForAlu & 0x3F) {
     case ADD:
+        if (dataForAlu & 0x10000) {
+            switch (dataForAlu & 0xC0000000 >> 30) {
+            case 0:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    commonlAluObj._add<uint64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27], commonRegsObj.w[dataForAlu & 0x700000000 >> 32]);
+                break;
+            case 1:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<int64_t>(static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            case 2:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<float>(static_cast<float>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<float>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            case 3:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<double>(static_cast<double>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<double>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            }
+        } else {
+//            AluControlBits obj;
 
+//            obj.reg0      = dataForAlu & 0x07000000 >> 24;
+//            obj.reg1      = dataForAlu & 0x38000000 >> 27;
+//            obj.extencion = dataForAlu & 0xC0000000 >> 30;
+
+            //unsigned - 00, signed - 01, flaot - 10, double - 11 (data type)
+            switch (dataForAlu & 0xC0000000 >> 30) {
+            case 0:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    commonlAluObj._add<uint64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27], dataForAlu & 0xFFFFFFFF00000000 >> 32);
+                break;
+            case 1:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<int64_t>(static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            case 2:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<float>(static_cast<float>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            case 3:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._add<double>(static_cast<double>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            }
+        }
         break;
 
     case SUB:
+        if (dataForAlu & 0x10000) {
+            switch (dataForAlu & 0xC0000000 >> 30) {
+            case 0:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    commonlAluObj._sub<uint64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27], commonRegsObj.w[dataForAlu & 0x700000000 >> 32]);
+                break;
+            case 1:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<int64_t>(static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            case 2:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<float>(static_cast<float>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<float>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            case 3:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<double>(static_cast<double>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), static_cast<double>(commonRegsObj.w[dataForAlu & 0x700000000 >> 32])));
+                break;
+            }
+        } else {
+//            AluControlBits obj;
+
+//            obj.reg0      = dataForAlu & 0x07000000 >> 24;
+//            obj.reg1      = dataForAlu & 0x38000000 >> 27;
+//            obj.extencion = dataForAlu & 0xC0000000 >> 30;
+
+            //unsigned - 00, signed - 01, flaot - 10, double - 11 (data type)
+            switch (dataForAlu & 0xC0000000 >> 30) {
+            case 0:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    commonlAluObj._sub<uint64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27], dataForAlu & 0xFFFFFFFF00000000 >> 32);
+                break;
+            case 1:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<int64_t>(static_cast<int64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            case 2:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<float>(static_cast<float>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            case 3:
+                commonRegsObj.w[dataForAlu & 0x07000000 >> 24] =
+                    static_cast<uint64_t>(commonlAluObj._sub<double>(static_cast<double>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27]), dataForAlu & 0xFFFFFFFF00000000 >> 32));
+                break;
+            }
+        }
         break;
 
     case MUL:
@@ -101,12 +192,13 @@ void Decode::decodeInputData(uint64_t data)
 
         //for furture
         obj.var0 = (data & 0xFF);
-        obj.var1 = (data & 0xFF00) >> 8;
+        obj.var1 = (data & 0xFF00)   >> 8;
         obj.var2 = (data & 0xFF0000) >> 16;
 
-        obj.extension = (data & 0x1000000) >> 24;
+        obj.extension = (data & 0x1000000)  >> 24;
         obj.registerNumber = (data & 0xE000000) >> 25;
         obj.reserve = (data & 0xF0000000) >> 28;
+
         uint32_t dataForReg = (data & 0xffffffff00000000) >> 32;
         commonRegsObj.wd(obj, dataForReg);
     }
@@ -158,14 +250,14 @@ void testForDecodeForWd()
 
         std::cout << "---------------------------------" <<  "\n";
 
-        std::cout << "w0 = " << std::hex << commonRegsObj.w0 <<  "\n"
-                  << "w1 = " << std::hex << commonRegsObj.w1 <<  "\n"
-                  << "w2 = " << std::hex << commonRegsObj.w2 <<  "\n"
-                  << "w3 = " << std::hex << commonRegsObj.w3 <<  "\n"
-                  << "w4 = " << std::hex << commonRegsObj.w4 <<  "\n"
-                  << "w5 = " << std::hex << commonRegsObj.w5 <<  "\n"
-                  << "w6 = " << std::hex << commonRegsObj.w6 <<  "\n"
-                  << "w7 = " << std::hex << commonRegsObj.w7 <<  "\n";
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
 
         std::cout << "---------------------------------" <<  "\n";
     }

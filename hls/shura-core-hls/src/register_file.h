@@ -41,14 +41,7 @@ class Reg
 public:
 
     //basic registers for writing
-    uint64_t w0 = 0;
-    uint64_t w1 = 0;
-    uint64_t w2 = 0;
-    uint64_t w3 = 0;
-    uint64_t w4 = 0;
-    uint64_t w5 = 0;
-    uint64_t w6 = 0;
-    uint64_t w7 = 0;
+    uint64_t w[8] = {0};
 
     //basic registers for reading
     uint64_t r0 = 0;
@@ -72,7 +65,7 @@ public:
     uint64_t er = 0;
 
     //temporary register
-    uint64_t t0 = 0; //for writing data to registers
+//    uint64_t t0 = 0; //for writing data to registers
     uint64_t t1 = 0; //for reading data
     uint64_t t2 = 0; //for writing data
     uint64_t t3 = 0; //for decoding data
@@ -85,74 +78,15 @@ public:
     //write data to registers
     void wd(Svd &value, const uint32_t &data)
     {
-        t0 = 0;
-        switch (value.registerNumber) {
-        case 0:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w0 = commonlAluObj._or<uint64_t>(w0, t0);
-            } else {
-                w0 = data;
-            }
-            break;
-        case 1:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w1 = commonlAluObj._or<uint64_t>(w1, t0);
-            } else {
-                w1 = data;
-            }
-            break;
-        case 2:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w2 = commonlAluObj._or<uint64_t>(w2, t0);
-            } else {
-                w2 = data;
-            }
-            break;
-        case 3:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w3 = commonlAluObj._or<uint64_t>(w3, t0);
-            } else {
-                w3 = data;
-            }
-            break;
-        case 4:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w4 = commonlAluObj._or<uint64_t>(w4, t0);
-            } else {
-                w4 = data;
-            }
-            break;
-        case 5:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w5 = commonlAluObj._or<uint64_t>(w5, t0);
-            } else {
-                w5 = data;
-            }
-            break;
-        case 6:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w6 = commonlAluObj._or<uint64_t>(w6, t0);
-            } else {
-                w6 = data;
-            }
-            break;
-        case 7:
-            if (value.extension) {
-                t0 = commonlAluObj._lshift<uint64_t>(data, 32);
-                w7 = commonlAluObj._or<uint64_t>(w7, t0);
-            } else {
-                w7 = data;
-            }
-            break;
+        uint64_t t0 = 0;
+        if (value.extension) {
+            t0 = commonlAluObj._lshift<uint64_t>(data, 32);
+            w[value.registerNumber] = commonlAluObj._or<uint64_t>(w[value.registerNumber], t0);
+        } else {
+            w[value.registerNumber] = data;
         }
     }
+
 };
 
 

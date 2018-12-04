@@ -56,14 +56,14 @@ void testForWd()
             dataSvd.registerNumber = i;
             commonRegsObj.wd(dataSvd, dataToReg);
 
-            std::cout << "w0 = " << std::hex << commonRegsObj.w0 <<  "\n"
-                      << "w1 = " << std::hex << commonRegsObj.w1 <<  "\n"
-                      << "w2 = " << std::hex << commonRegsObj.w2 <<  "\n"
-                      << "w3 = " << std::hex << commonRegsObj.w3 <<  "\n"
-                      << "w4 = " << std::hex << commonRegsObj.w4 <<  "\n"
-                      << "w5 = " << std::hex << commonRegsObj.w5 <<  "\n"
-                      << "w6 = " << std::hex << commonRegsObj.w6 <<  "\n"
-                      << "w7 = " << std::hex << commonRegsObj.w7 <<  "\n";
+            std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                      << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                      << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                      << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                      << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                      << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                      << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                      << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
             std::cout << "---------------------------------" <<  "\n";
 
             //data 64bit to register
@@ -71,28 +71,28 @@ void testForWd()
             dataSvdP2.registerNumber = i;
             commonRegsObj.wd(dataSvdP2, dataToRegP2);
 
-            std::cout << "w0 = " << std::hex << commonRegsObj.w0 <<  "\n"
-                      << "w1 = " << std::hex << commonRegsObj.w1 <<  "\n"
-                      << "w2 = " << std::hex << commonRegsObj.w2 <<  "\n"
-                      << "w3 = " << std::hex << commonRegsObj.w3 <<  "\n"
-                      << "w4 = " << std::hex << commonRegsObj.w4 <<  "\n"
-                      << "w5 = " << std::hex << commonRegsObj.w5 <<  "\n"
-                      << "w6 = " << std::hex << commonRegsObj.w6 <<  "\n"
-                      << "w7 = " << std::hex << commonRegsObj.w7 <<  "\n";
+            std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                      << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                      << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                      << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                      << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                      << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                      << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                      << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
             std::cout << "---------------------------------" <<  "\n";
 
             dataSvdP1.extension = 1;
             dataSvdP1.registerNumber = i;
             commonRegsObj.wd(dataSvdP1, dataToRegP1);
 
-            std::cout << "w0 = " << std::hex << commonRegsObj.w0 <<  "\n"
-                      << "w1 = " << std::hex << commonRegsObj.w1 <<  "\n"
-                      << "w2 = " << std::hex << commonRegsObj.w2 <<  "\n"
-                      << "w3 = " << std::hex << commonRegsObj.w3 <<  "\n"
-                      << "w4 = " << std::hex << commonRegsObj.w4 <<  "\n"
-                      << "w5 = " << std::hex << commonRegsObj.w5 <<  "\n"
-                      << "w6 = " << std::hex << commonRegsObj.w6 <<  "\n"
-                      << "w7 = " << std::hex << commonRegsObj.w7 <<  "\n";
+            std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                      << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                      << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                      << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                      << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                      << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                      << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                      << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
             std::cout << "---------------------------------" <<  "\n";
             std::cout << "---------------------------------" <<  "\n";
         }
