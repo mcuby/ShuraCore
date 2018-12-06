@@ -22,7 +22,8 @@ static int ram_data[3] = {0};
 int main()
 {
 
-    testForDecodeForWd();
+//    testForDecodeForWd();
+    testAluAdd();
 
     return 0;
 }
