@@ -135,6 +135,7 @@ public:
 };
 
 void testForDecodeForWd();
-void testAluAdd();
+void testAluAddUint32();
+void testAluAddInt32();
 
 extern Decode commonDecodeObj;
