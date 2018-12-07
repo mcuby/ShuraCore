@@ -63,7 +63,7 @@ void Decode::decodeInputDataForAlu(uint64_t dataForAlu)
             switch (dataForAlu & 0xC0000000 >> 30) {
             case 0x00:
                 commonRegsObj.w[(dataForAlu & 0x07000000) >> 24] =
-                    commonlAluObj._add<uint64_t>(commonRegsObj.w[dataForAlu & 0x38000000 >> 27], (dataForAlu & 0xFFFFFFFF00000000) >> 32);
+                    commonlAluObj._add<uint64_t>(commonRegsObj.w[(dataForAlu & 0x38000000) >> 27], (dataForAlu & 0xFFFFFFFF00000000) >> 32);
                 break;
             case 0x01:
                 commonRegsObj.w[(dataForAlu & 0x07000000) >> 24] =
@@ -217,7 +217,7 @@ void testForDecodeForWd()
     }
 }
 
-void makeForRegisters(int numberOfRegister, int pad, uint32_t data)
+void makeForRegisters(uint32_t numberOfRegister, bool pad, uint32_t data)
 {
     if (pad) {
         uint64_t t0 = commonlAluObj._lshift<uint64_t>(data, 32);
@@ -230,37 +230,37 @@ void makeForRegisters(int numberOfRegister, int pad, uint32_t data)
 
 void testAluAdd(void)
 {
-    uint64_t r0_u32 = 0;
-    uint64_t r1_u32 = 1;
-    uint64_t r2_u32 = 2;
-    uint64_t r3_u32 = 3;
-    uint64_t r4_u32 = 4;
-    uint64_t r5_u32 = 5;
-    uint64_t r6_u32 = 6;
-    uint64_t r7_u32 = 7;
+    uint32_t r0_u32 = 0;
+    uint32_t r1_u32 = 1;
+    uint32_t r2_u32 = 2;
+    uint32_t r3_u32 = 3;
+    uint32_t r4_u32 = 4;
+    uint32_t r5_u32 = 5;
+    uint32_t r6_u32 = 6;
+    uint32_t r7_u32 = 7;
 
-    makeForRegisters((int)r0_u32, 0, (uint32_t)r0_u32);
+    makeForRegisters(r0_u32, 0, r0_u32);
     std::cout << "w0 = " << std::hex << commonRegsObj.w[r0_u32] <<  "\n";
 
-    makeForRegisters((int)r1_u32, 0, (uint32_t)r1_u32);
+    makeForRegisters(r1_u32, 0, r1_u32);
     std::cout << "w1 = " << std::hex << commonRegsObj.w[r1_u32] <<  "\n";
 
-    makeForRegisters((int)r2_u32, 0, (uint32_t)r2_u32);
+    makeForRegisters(r2_u32, 0, r2_u32);
     std::cout << "w2 = " << std::hex << commonRegsObj.w[r2_u32] <<  "\n";
 
-    makeForRegisters((int)r3_u32, 0, (uint32_t)r3_u32);
+    makeForRegisters(r3_u32, 0, r3_u32);
     std::cout << "w3 = " << std::hex << commonRegsObj.w[r3_u32] <<  "\n";
 
-    makeForRegisters((int)r4_u32, 0, (uint32_t)r4_u32);
+    makeForRegisters(r4_u32, 0, r4_u32);
     std::cout << "w4 = " << std::hex << commonRegsObj.w[r4_u32] <<  "\n";
 
-    makeForRegisters((int)r5_u32, 0, (uint32_t)r5_u32);
+    makeForRegisters(r5_u32, 0, r5_u32);
     std::cout << "w5 = " << std::hex << commonRegsObj.w[r5_u32] <<  "\n";
 
-    makeForRegisters((int)r6_u32, 0, (uint32_t)r6_u32);
+    makeForRegisters(r6_u32, 0, r6_u32);
     std::cout << "w6 = " << std::hex << commonRegsObj.w[r6_u32] <<  "\n";
 
-    makeForRegisters((int)r7_u32, 0, (uint32_t)r7_u32);
+    makeForRegisters(r7_u32, 0, r7_u32);
     std::cout << "w7 = " << std::hex << commonRegsObj.w[r7_u32] <<  "\n";
 
     //r0/r0
@@ -297,6 +297,66 @@ void testAluAdd(void)
         0x0000000112000000,
         0x0000000112000000,
         0x0000000112000000
+    };
+
+    //r3/r3
+    uint64_t add_array_r3[8] = {
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000,
+        0x000000011B000000
+    };
+
+    //r4/r4
+    uint64_t add_array_r4[8] = {
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000,
+        0x000000024000000
+    };
+
+    //r5/r5
+    uint64_t add_array_r5[8] = {
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000,
+        0x000000012D000000
+    };
+
+    //r6/r6
+    uint64_t add_array_r6[8] = {
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000,
+        0x0000000136000000
+    };
+
+    //r7/r7
+    uint64_t add_array_r7[8] = {
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000,
+        0x000000013F000000
     };
 
     for (uint64_t number : add_array_r0) {
@@ -350,6 +410,90 @@ void testAluAdd(void)
         std::cout << "---------------------------------"       <<  "\n";
     }
 
+    for (uint64_t number : add_array_r3) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------"       <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
+
+        std::cout << "---------------------------------"       <<  "\n";
+    }
+
+    for (uint64_t number : add_array_r4) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------"       <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
+
+        std::cout << "---------------------------------"       <<  "\n";
+    }
+
+
+    for (uint64_t number : add_array_r5) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------"       <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
+
+        std::cout << "---------------------------------"       <<  "\n";
+    }
+
+    for (uint64_t number : add_array_r6) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------"       <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
+
+        std::cout << "---------------------------------"       <<  "\n";
+    }
+
+    for (uint64_t number : add_array_r7) {
+        commonDecodeObj.decodeInputData(number);
+
+        std::cout << "---------------------------------"       <<  "\n";
+
+        std::cout << "w0 = " << std::hex << commonRegsObj.w[0] <<  "\n"
+                  << "w1 = " << std::hex << commonRegsObj.w[1] <<  "\n"
+                  << "w2 = " << std::hex << commonRegsObj.w[2] <<  "\n"
+                  << "w3 = " << std::hex << commonRegsObj.w[3] <<  "\n"
+                  << "w4 = " << std::hex << commonRegsObj.w[4] <<  "\n"
+                  << "w5 = " << std::hex << commonRegsObj.w[5] <<  "\n"
+                  << "w6 = " << std::hex << commonRegsObj.w[6] <<  "\n"
+                  << "w7 = " << std::hex << commonRegsObj.w[7] <<  "\n";
+
+        std::cout << "---------------------------------"       <<  "\n";
+    }
+
 }
-
-
